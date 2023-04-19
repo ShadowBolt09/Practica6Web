@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Mostrar Artículos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        function cargarArticulos() {
+            fetch('mostrar.php')
+            .then(response => response.json())
+            .then(articulos => {
+                let tabla = document.getElementById('articulos');
+                articulos.forEach(articulo => {
+                    let fila = tabla.insertRow();
+                    fila.insertCell().textContent = articulo.id_art;
+                    fila.insertCell().textContent = articulo.descr_art;
+                    fila.insertCell().textContent = articulo.cant;
+                    fila.insertCell().textContent = articulo.precio_art;
+                });
+            });
+        }
+    </script>
+</head>
+<body onload="cargarArticulos()">
+    <header>
+        <a href="index.html"><h1>Tienda</h1></a>
+        <nav>
+            <ul>
+                <li><a href="alta.html">Alta</a></li>
+                <li><a href="baja.html">Baja</a></li>
+                <li><a href="mostrar.html">Mostrar</a></li>
+                <li><a href="cambios.html">Cambios</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Artículos en la Tiendita</h1>
+    <table id="articulos">
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+    </table>
+    <a href="index.html">Volver a la página principal</a>
+</body>
+</html>
